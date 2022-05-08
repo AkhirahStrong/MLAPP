@@ -1,5 +1,6 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MovieList {
@@ -13,7 +14,6 @@ public class MovieList {
 
 	public static void main(String[] args) {
 		
-		//ArrayList<MovieList> movieList = new ArrayList<>();
 		movieTitleList.add(new Movie("Citizen Kane", "drama"));
 		movieTitleList.add(new Movie("The Godfather", "drama"));
 		movieTitleList.add(new Movie("2001: A Space Odyssey", "scifi"));
@@ -32,7 +32,6 @@ public class MovieList {
 		System.out.println("There are 10 movies in this list.");
 		System.out.println("The categorie are: Drama, SiFi, Animation, and Horror");
 		System.out.println("What category are you interested in?");
-		//useInput = scan.nextLine();
 		
 		for (Movie movieTitle : movieTitleList) {
 			if (!movieCategory.contains(movieTitle.getCategory()))
@@ -40,6 +39,8 @@ public class MovieList {
 		}
 		
 		do {
+			
+			try {
 			 useInput = scan.nextLine().toLowerCase();
 
 			if (movieTitleList.contains(useInput)) {
@@ -53,7 +54,12 @@ public class MovieList {
 				System.out.println("Try again, enter a valid genre (Anime, Action, Comedy, or Drama)");
 			}
 
-		} while (looped);
+		} catch(InputMismatchException e) {
+			
+			System.out.println("Movie category doesn't exist");
+		}
+		
+		}while (looped);
 	}
 
 }
